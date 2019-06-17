@@ -13,21 +13,41 @@
 
 <body>
     <div class="container">
-        <h3>
+
+
+        <h3 id="directions-text">
             Press any key to get this game started!
         </h3>
-    </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <div id="wins"></div>
-            </div>
-            <div class="col-4">
-                <div id="losses"></div>
-            </div>
-            <div class="col-4">
-                <div id="guessedLetter"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <p>
+                        Guesses left:
+                        <p id="guessesLeft"></p>
+                    </p>
+                </div>
+                <div class="col-3">
+                    <p>
+                        You've won
+                        <p id="wins"></p>
+                        times!
+                    </p>
+                </div>
+                <div class="col-3">
+                    <p>
+                        You've lost
+                        <p id="losses"></p>
+                        times...
+                    </p>
+                </div>
+                <div class="col-3">
+                    <p>
+                        Letters guessed:
+                        <p id="guessedLetter"></p>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
