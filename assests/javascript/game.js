@@ -1,71 +1,103 @@
 var rbSingers = ["usher","musiq soulchild","daniel caesar","chris brown","ella mai","her"];
-
 var wins = 0;
 var losses = 0;
 var guessesLeft = 10;
-
+var inserts = 0;
 var guessedLetter = [];
-var currentWord = [];
+var individual = [];
+var slots = [];
+var randomSing = "";
 
 var directionsText = document.getElementById("directions-text");
 
-var randomSing
+gameStart()
 
-// START
+// COUNTERS
+
+document.getElementById("wins").textContent = wins;
+document.getElementById("losses").textContent = losses;
+document.getElementById("guessedLetter").textContent = guessedLetter.join;
+document.getElementById("guessesLeft").textContent = guessesLeft;
+
+// KEY PRESS
 
 document.onkeypress = function (event) {
+
     directionsText.textContent = "";
-    letterCheck (event.key.toUpperCase())
+
+    letterCheck (event.key);
 }
 
 // FUNCTIONS
 
 function gameStart () {
 
-    randomSing = rbSingers[Math.floor(Math.random() *rbSingers.length)].toUpperCase();
+    randomSing = rbSingers[Math.floor(Math.random() *rbSingers.length)];
 
-    lettersOfWord = randomWord.split("");
+    var individual = randomSing.split("");
 
-    //store length of word in blanks, for later use
-    blanks = lettersOfWord.length;
+    var inserts = individual.length;
 
-    //creating a loop to generate "_" for each letter in array stored in blanks
-    for (var i = 0; i < blanks; i++) {
-        blanksAndCorrect.push("_");
+    for (var i = 0; i < inserts; i++) {
+
+        slots.push("_");
     }
 
-    //showing the "_" within HTML
-    document.getElementById("currentword").innerHTML = "  " + blanksAndCorrect.join("  ");
-}
+    document.getElementById("guessingWord").textContent = "  " + slots.join("  ");
+};
 
-// LETTER CHECK
+// LETTER CHECK (NOT WORKING)
 
 function letterCheck (letter) {
 
-    var guessTrue  = false;
+    var foundLetter = false;
 
-// TRUE STATEMENT
+    for (var i = 0; i < inserts; i++) {
 
-    for (var i = 0; i < blanks; i++) {
-        if (randomSing[i] == letter) {
-            guessTrue = true;
+        if (randomSing[i] === letter) {
+
+            foundLetter = true;
+            
         }
     }
 
-// FALSE STATEMENT
+    if (foundLetter) {
+        
+        for (var i = 0; i < inserts; i++) {
 
-    if (guessTrue) {
-        for (var i = 0; i < blanks; i++) {
-            if (randomSing[i] == letter) {
-                blanksAndCorrect[i] = letter;
+            if (randomSing[i] === letter) {
+
+                slots[i] = letter;
+
+                document.getElementById("guessingWord").textContent = "  " + slots.push(" ");
             }
         }
     }
-
+    
     else {
+
         guessedLetter.push(letter);
+
         guessesLeft--;
     }
+
+    if (individual === slots) {
+
+        wins++;
+        
+        document.getElementById("wins").textContent = " " + wins;
+
+    } else if (guessesLeft === 0) {
+
+        losses++;
+
+        reset()
+
+        document.getElementById("losses").textContent = " " + losses;
+    }
+    document.getElementById("guessedLetter").textContent = guessedLetter;
+
+    document.getElementById("guessesLeft").textContent = " " + guessesLeft;
 
 }
 
@@ -74,15 +106,6 @@ function letterCheck (letter) {
 function reset() {
     guessesLeft= 10;
     guessedLetter = [];
-    blanksAndCorrect = [];
+    slots = [];
     gameStart();
 }
-
-// DISPLAYED NUMBERS
-
-document.getElementById("wins").innerText = "" + wins;
-document.getElementById("losses").innerText = "" + losses;
-document.getElementById("guessedLetter").innerText = "" + guessedLetter;
-document.getElementById("guessesLeft").innerText = "" + guessesLeft;
-
-
